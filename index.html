@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <meta name="fragment" content="!">
+    <meta name="description" content="MEAN app for the Artoo Campus">
+    <meta name="author" content="ArtooCampus">
+    <meta name="application-name" content="Services">
+    <meta name="viewport" content="width=device-width">
+    <title>Artoo Campus - Services</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body ng-app="app">
+    <div class="container">
+        <!-- create an items service with the following methods: get, add, remove -->
+        <div ng-controller="ItemsCtrl">
+            <h3>Get Item: {{nomeArma}}</h3>
+            <input class="form-control" type="text" ng-model='nomeArma'>
+            <div ng-show="!!risultato">
+                <h2 ng-bind="risultato.nome"></h2>
+                <p ng-bind="risultato.descrizione"></p>
+                Slots: <span ng-bind="risultato.slots"></span>
+                <img class="img-responsive" style="max-width:10%;margin:20px auto" ng-src="{{risultato.image}}" alt="" />
+                <hr>
+            </div>
+            <div ng-hide="!!risultato">
+                Item not found.
+            </div>
+            <div ng-show="!risultato">
+                <button class="btn btn-primary" ng-click="Items.add()">Add new Item</button>
+                <div class="text-center">
+                    <h1>Lista Armi</h1>
+                </div>
+                <div class="item" ng-repeat="item in Items.list()">
+                    <h2 ng-bind="item.nome"></h2>
+                    <p ng-bind="item.descrizione"></p>
+                    Slots: <span ng-bind="item.slots"></span>
+                    <img class="img-responsive" style="max-width:10%;margin:20px auto" ng-src="{{item.image}}" alt="" />
+                    <button class="btn btn-danger" ng-click="Items.remove($index)">Rimuovi</button>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="app.js"></script>
+        <!-- include items service -->
+        <script src="items.services.js"></script>
+        <script src="items.controller.js"></script>
+    </div>
+</body>
+
+</html>
